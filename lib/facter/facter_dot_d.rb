@@ -49,7 +49,7 @@ class Facter::Util::DotD
             end
         end
     rescue Exception => e
-        Facter.warn("Failed to handle #{file} as text facts: #{e.class}: #{e}")
+        puts "Failed to handle #{file} as text facts: #{e.class}: #{e}"
     end
 
     def json_parser(file)
@@ -66,7 +66,7 @@ class Facter::Util::DotD
             end
         end
     rescue Exception => e
-        Facter.warn("Failed to handle #{file} as json facts: #{e.class}: #{e}")
+        puts "Failed to handle #{file} as json facts: #{e.class}: #{e}"
     end
 
     def yaml_parser(file)
@@ -78,7 +78,7 @@ class Facter::Util::DotD
             end
         end
     rescue Exception => e
-        Facter.warn("Failed to handle #{file} as yaml facts: #{e.class}: #{e}")
+        puts "Failed to handle #{file} as yaml facts: #{e.class}: #{e}"
     end
 
     def script_parser(file)
@@ -95,7 +95,7 @@ class Facter::Util::DotD
             end
         else
             Puppet.deprecation_warning("TTL for external facts is being removed. See http://links.puppetlabs.com/factercaching for more information.")
-            Facter.debug("Using cached data for #{file}")
+            puts "Using cached data for #{file}"
         end
 
         result.split("\n").each do |line|
@@ -108,8 +108,8 @@ class Facter::Util::DotD
             end
         end
     rescue Exception => e
-        Facter.warn("Failed to handle #{file} as script facts: #{e.class}: #{e}")
-        Facter.debug(e.backtrace.join("\n\t"))
+        puts "Failed to handle #{file} as script facts: #{e.class}: #{e}"
+        puts e.backtrace.join("\n\t")
     end
 
     def cache_save!
